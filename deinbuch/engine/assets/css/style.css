@@ -1,0 +1,27 @@
+#navbar{
+   margin-left:30px;
+   margin-right: 30px;
+   margin-top: 20px;
+
+   text-align: center;
+   padding-top: 20px;
+
+   height: 45px;
+   width: auto;
+   background-color: rgb(121, 121, 121);
+}
+
+#routing{
+    margin-left:30px;
+    margin-right: 30px;
+    margin-top: 20px;
+
+    background-color: rgb(121, 121, 121);
+    
+
+    /*
+    TODO: Platzhalter, height dann auf auto oder einheitsgröße
+    */   
+    height: 400px;
+    width: auto;
+}
