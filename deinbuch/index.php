@@ -9,6 +9,16 @@
 </head>
 
 <body>
+    <!-- DBClass Test-->
+    <?php
+    include "./engine/helper/datenbank/Chandle_db.php";
+    $db = new datenbank();
+    
+    ?>
+
+    <?php 
+        session_start();
+    ?>
     <!-- NavContent -->
     <!-- Include NavBar -->
     <?php
@@ -24,7 +34,8 @@
 </body>
 
 
-<footer>
+<footer id="footer">
+    <a href="?p=impressum">Impressum</a>
 </footer>
 
 </html>
