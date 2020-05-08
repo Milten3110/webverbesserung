@@ -50,3 +50,16 @@
 #footer{
     text-align: center;
 }
+
+body{
+    background-image: url("../bilder/buch_background.png");
+}
+
+#homeBtn{
+    position: absolute;
+    height: 50px;
+    margin-top: 8px;
+    right: 76%;
+
+    border-radius: 5px;
+}

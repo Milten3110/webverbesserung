@@ -9,12 +9,16 @@
 </head>
 
 <body>
-    <!-- DBClass Test-->
+    <!-- Test -->
     <?php
     include "./engine/helper/datenbank/Chandle_db.php";
     $db = new datenbank();
-    
     ?>
+
+    <img src="engine/assets/bilder/home.png" alt="Bild für die Homepage" id="homeBtn">
+
+    <!--   END TEST -->
+
 
     <?php 
         session_start();

@@ -23,6 +23,13 @@ if (isset($_GET["p"])) {
         case 'impressum':
             include $baisc_pfad . 'impressum.php';
             break;
+        case 'logout':
+            include "./engine/helper/log_in_out.php";
+            header("Location: ?p=home");
+            break;
+        case 'profiel':
+            include $baisc_pfad . 'profiel.php';
+            break;
         default:
             include $baisc_pfad . 'home.php';
             break;
