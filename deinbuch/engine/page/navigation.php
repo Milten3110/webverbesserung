@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === 1) {
         <a href='?p=home'>Start</a>
         <a href='?p=news'>Neuigkeiten</a>
         <a href='?p=produkt'>Produkte</a>
+        <a href='?p=warenkorb'>Warenkorb</a>
         <a href='?p=profiel'>Mein Profiel</a>
         <a href='?p=logout'>Abmelden</a>
         <a href='?p=uns'>Über UNS</a>

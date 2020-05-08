@@ -1,0 +1,1 @@
+<p>Hier stehen die zu Kaufende Waren</p>

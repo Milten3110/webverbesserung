@@ -30,6 +30,9 @@ if (isset($_GET["p"])) {
         case 'profiel':
             include $baisc_pfad . 'profiel.php';
             break;
+        case 'warenkorb':
+            include $baisc_pfad . 'warenkorb.php';
+        break;
         default:
             include $baisc_pfad . 'home.php';
             break;
