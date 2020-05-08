@@ -1,0 +1,177 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema webdb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema webdb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `webdb` DEFAULT CHARACTER SET utf8 ;
+USE `webdb` ;
+
+-- -----------------------------------------------------
+-- Table `webdb`.`WARENKORB`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`WARENKORB` (
+  `id` INT NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`KUNDEN_INTERESSE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`KUNDEN_INTERESSE` (
+  `id` INT NOT NULL,
+  `genre` VARCHAR(45) NOT NULL,
+  `ausgeliehen` INT NOT NULL,
+  `gekauft` INT NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`KUNDE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`KUNDE` (
+  `id` INT NOT NULL,
+  `vorname` VARCHAR(45) NOT NULL,
+  `nachname` VARCHAR(45) NOT NULL,
+  `geburtsdatum` DATETIME NOT NULL,
+  `nummer` INT NOT NULL,
+  `bundesland` VARCHAR(45) NOT NULL,
+  `plz` VARCHAR(5) NOT NULL,
+  `ort` VARCHAR(45) NOT NULL,
+  `strasse` VARCHAR(45) NOT NULL,
+  `WARENKORB_id` INT NOT NULL,
+  `KUNDEN_INTERESSE_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_KUNDE_WARENKORB1_idx` (`WARENKORB_id` ASC) VISIBLE,
+  INDEX `fk_KUNDE_KUNDEN_INTERESSE1_idx` (`KUNDEN_INTERESSE_id` ASC) VISIBLE,
+  CONSTRAINT `fk_KUNDE_WARENKORB1`
+    FOREIGN KEY (`WARENKORB_id`)
+    REFERENCES `webdb`.`WARENKORB` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_KUNDE_KUNDEN_INTERESSE1`
+    FOREIGN KEY (`KUNDEN_INTERESSE_id`)
+    REFERENCES `webdb`.`KUNDEN_INTERESSE` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`ACCOUNT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`ACCOUNT` (
+  `id` INT NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `letzter_login` TIMESTAMP NOT NULL,
+  `treuepunkte` INT NOT NULL,
+  `KUNDE_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ACCOUNT_KUNDE_idx` (`KUNDE_id` ASC) VISIBLE,
+  CONSTRAINT `fk_ACCOUNT_KUNDE`
+    FOREIGN KEY (`KUNDE_id`)
+    REFERENCES `webdb`.`KUNDE` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`GENRE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`GENRE` (
+  `id` INT NOT NULL,
+  `genre_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`BESTELLUNGEN`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`BESTELLUNGEN` (
+  `id` INT NOT NULL,
+  `bestelldatum` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`PRODUKT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`PRODUKT` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `author` VARCHAR(45) NOT NULL,
+  `verlag` VARCHAR(45) NOT NULL,
+  `isbn` VARCHAR(45) NOT NULL,
+  `preis` FLOAT NOT NULL,
+  `GENRE_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_PRODUKT_GENRE1_idx` (`GENRE_id` ASC) VISIBLE,
+  CONSTRAINT `fk_PRODUKT_GENRE1`
+    FOREIGN KEY (`GENRE_id`)
+    REFERENCES `webdb`.`GENRE` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`ACCOUNT_has_BESTELLUNGEN`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`ACCOUNT_has_BESTELLUNGEN` (
+  `ACCOUNT_id` INT NOT NULL,
+  `BESTELLUNGEN_id` INT NOT NULL,
+  PRIMARY KEY (`ACCOUNT_id`, `BESTELLUNGEN_id`),
+  INDEX `fk_ACCOUNT_has_BESTELLUNGEN_BESTELLUNGEN1_idx` (`BESTELLUNGEN_id` ASC) VISIBLE,
+  INDEX `fk_ACCOUNT_has_BESTELLUNGEN_ACCOUNT1_idx` (`ACCOUNT_id` ASC) VISIBLE,
+  CONSTRAINT `fk_ACCOUNT_has_BESTELLUNGEN_ACCOUNT1`
+    FOREIGN KEY (`ACCOUNT_id`)
+    REFERENCES `webdb`.`ACCOUNT` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ACCOUNT_has_BESTELLUNGEN_BESTELLUNGEN1`
+    FOREIGN KEY (`BESTELLUNGEN_id`)
+    REFERENCES `webdb`.`BESTELLUNGEN` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`BESTELLUNGEN_has_PRODUKT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`BESTELLUNGEN_has_PRODUKT` (
+  `BESTELLUNGEN_id` INT NOT NULL,
+  `PRODUKT_id` INT NOT NULL,
+  PRIMARY KEY (`BESTELLUNGEN_id`, `PRODUKT_id`),
+  INDEX `fk_BESTELLUNGEN_has_PRODUKT_PRODUKT1_idx` (`PRODUKT_id` ASC) VISIBLE,
+  INDEX `fk_BESTELLUNGEN_has_PRODUKT_BESTELLUNGEN1_idx` (`BESTELLUNGEN_id` ASC) VISIBLE,
+  CONSTRAINT `fk_BESTELLUNGEN_has_PRODUKT_BESTELLUNGEN1`
+    FOREIGN KEY (`BESTELLUNGEN_id`)
+    REFERENCES `webdb`.`BESTELLUNGEN` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_BESTELLUNGEN_has_PRODUKT_PRODUKT1`
+    FOREIGN KEY (`PRODUKT_id`)
+    REFERENCES `webdb`.`PRODUKT` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

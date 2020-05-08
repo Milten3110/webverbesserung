@@ -1,0 +1,13 @@
+FK Erstellen, In Table :
+CONSTRAINT FK_"name" FOREIGN KEY ("acctuelleTableElement"),
+REFERENCES "whosTable"("whosTableElement")
+
+Insert in FK Table
+insert into "table" ("item") values ( (select "item" from "table" where "item"="item") );
+
+Select Table mit FK Elementen
+
+
+von rechtsw nach links
+
+
