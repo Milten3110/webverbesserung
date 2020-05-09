@@ -20,7 +20,7 @@
                 Dienstag
             </th>
             <th>
-                Mittwock
+                Mittwoch
             </th>
             <th>
                 Donnerstag
