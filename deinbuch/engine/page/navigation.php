@@ -5,13 +5,15 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === 1) {
         <nav id='navbar'>
         <a class='navBtn' href='?p=home'>Start</a>
         <a class='navBtn' href='?p=news'>Neuigkeiten</a>
-        <a class='navBtn' href='?p=produkt'>Produkte</a>
-        <a class='navBtn' href='?p=warenkorb'>Warenkorb</a>
-        <a class='navBtn' href='?p=profiel'>Mein Profiel</a>
-        <a class='navBtn' href='?p=logout'>Abmelden</a>
         <a class='navBtn' href='?p=uns'>Über UNS</a>
+        <a class='navBtn' href='?p=produkt'>Produkte</a>
+        <a class='navBtn' href='?p=profiel'>Mein Profiel</a>
         </nav>
-    ";
+        ";
+     /*
+        <a class='navBtn' href='?p=warenkorb'>Warenkorb</a>
+        <a class='navBtn' href='?p=logout'>Abmelden</a>
+    */ 
 } else {
     echo "
         <nav id='navbar'>

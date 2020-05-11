@@ -13,6 +13,7 @@
     <?php
     include "./engine/helper/datenbank/Chandle_db.php";
     $db = new datenbank();
+    
     ?>
 
     <img src="engine/assets/bilder/home.png" alt="Bild für die Homepage" id="homeBtn">
@@ -22,6 +23,7 @@
 
     <?php 
         session_start();
+        $_SESSION["login"] = 1;
     ?>
     <!-- NavContent -->
     <!-- Include NavBar -->

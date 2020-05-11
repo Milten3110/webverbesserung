@@ -1,5 +1,5 @@
 <div id="firmenInformationen">
-    <p>DeinBuch, ist eine Firma die sich extra für Kunden angachiert,
+    <p>DeinBuch, ist eine Firma die sich extra für Kunden engagiert,
         die sich über die mehrlebigkeit eines Buches gedanken machen.
         Wir sorgen dafür , dass nicht jedes Buch nur 1x gelesen wird 
         und dann im Schrank verstaupt.
