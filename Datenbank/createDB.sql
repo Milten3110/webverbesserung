@@ -23,8 +23,6 @@ ENGINE = InnoDB;
 
 
 
-
-
 -- -----------------------------------------------------
 -- Table `webdb`.`ACCOUNT`
 -- -----------------------------------------------------
@@ -107,7 +105,6 @@ CREATE TABLE IF NOT EXISTS `webdb`.`BESTELLUNGEN` (
   REFERENCES `webdb`.`ACCOUNT`(`id`)
   )
 ENGINE = InnoDB;
-
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
