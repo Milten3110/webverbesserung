@@ -13,17 +13,18 @@
     <?php
     include "./engine/helper/datenbank/Chandle_db.php";
     $db = new datenbank();
-    
+
     ?>
 
-    <img src="engine/assets/bilder/home.png" alt="Bild für die Homepage" id="homeBtn">
+    
 
     <!--   END TEST -->
+    
 
 
-    <?php 
-        session_start();
-        $_SESSION["login"] = 1;
+    <?php
+    session_start();
+    $_SESSION["login"] = 0;
     ?>
     <!-- NavContent -->
     <!-- Include NavBar -->
@@ -31,11 +32,18 @@
     include "./engine/page/navigation.php";
     ?>
 
+
+    <!-- SeitenEffeckt -->
+    <div class="left-gradient darkeffeckt" >
+    </div>
+    <div class="right-gradient darkeffeckt">
+    </div>
+
     <!-- Routing Content -->
     <div id="routing">
-    <?php 
-    include "./engine/helper/routing.php";
-    ?>
+        <?php
+        include "./engine/helper/routing.php";
+        ?>
     </div>
 </body>
 

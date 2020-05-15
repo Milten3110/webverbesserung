@@ -13,17 +13,29 @@ input {
     font-family: ownFont;
 }
 
+#navContainer{
+    display: flex;
+    justify-content: center;
+}
+
+#navContent {
+    z-index: 1;
+    width: 700px;
+    height: 60px;
+    position: fixed;
+    top: 0px;
+
+    display: flex;
+    justify-content: center;
+
+    /*Design der Navbar an sich */
+    background: rgba(161, 133, 189, 1);
+}
+
 #navbar {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    margin-left: 30px;
-    margin-right: 30px;
-    height: 60px;
-    width: auto;
-    background: rgba(155, 90, 37, 0.938);
-    border-radius: 5px;
-    border: 5px solid rgba(158, 97, 46, 0.836);
+    align-items: center;
     font-family: ownFont;
     font-size: 20px;
 }
@@ -62,8 +74,10 @@ input {
 #routing {
     margin-left: 30px;
     margin-right: 30px;
-    margin-top: 20px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(236, 236, 236, 0.7) 20%, rgba(236, 236, 236, 0.7) 90%, rgba(231, 231, 231, 0.1) 100%);
+    margin-top: 120px;
+    background: white;
+
+
     font-family: ownFont;
     /*
     TODO: Platzhalter, height dann auf auto oder einheitsgröße
@@ -80,9 +94,29 @@ input {
 
 body {
     background-image: url("../bilder/buch_background.png");
-    background: radial-gradient()
+    background: radial-gradient();
+    margin: 0px;
 }
 
+/*Links und Rechts Verdunkelung*/
+
+.darkeffeckt {
+    top: 0px;
+    height: 100vh;
+    width: 2vh;
+}
+
+.left-gradient {
+    float: left;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(-90deg, rgba(255, 255, 255, 0.2329306722689075) 0%, rgba(255, 255, 255, 0.32816876750700286) 25%, rgba(119, 116, 116, 0.5662640056022409) 61%, rgba(83, 82, 82, 0.5466561624649859) 84%, rgba(55, 55, 55, 0.5158438375350141) 100%);
+}
+
+.right-gradient {
+    float: right;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2329306722689075) 0%, rgba(255, 255, 255, 0.32816876750700286) 25%, rgba(119, 116, 116, 0.5662640056022409) 61%, rgba(83, 82, 82, 0.5466561624649859) 84%, rgba(55, 55, 55, 0.5158438375350141) 100%);
+}
 
 /*
 ###############################
@@ -94,13 +128,22 @@ body {
     padding: 20x;
 }
 
-
 /*Bild zur HomeSite*/
 
 #homeBtn {
     position: absolute;
     height: 50px;
     margin-top: 10px;
-    right: 79%;
+    right: 75%;
     border-radius: 5px;
+}
+
+/*###########################################################*/
+
+/*############MEDIA QUERYS###################################*/
+
+/*###########################################################*/
+
+@media screen and (max-width: 1350px) and (min-width: 992px) {
+    
 }
