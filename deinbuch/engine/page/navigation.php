@@ -20,9 +20,9 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === 1) {
         <a class='navBtn' href='?p=home'>Home</a>
         <a class='navBtn' href='?p=news'>Neuigkeiten</a>
         <a class='navBtn' href='?p=produkt'>Produkte</a>
+        <a class='navBtn' href='?p=uns'>Über-UNS</a>
         <a class='navBtn' href='?p=login'>Anmelden</a>
         <a class='navBtn' href='?p=regestrieren'>Regestrieren</a>
-        <a class='navBtn' href='?p=uns'>Über-UNS</a>
         </nav>
     </div>  </div>
     ";
