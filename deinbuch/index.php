@@ -14,6 +14,7 @@
     include "./engine/helper/datenbank/Chandle_db.php";
     $db = new datenbank();
 
+    
     ?>
 
     <!--   END TEST -->
@@ -42,6 +43,9 @@
     <div id="routing">
         <div id="routingContent">
             <?php
+            
+            $db->suche("roman");
+
             include "./engine/helper/routing.php";
             ?>
         </div>

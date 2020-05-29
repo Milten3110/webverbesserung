@@ -8,12 +8,10 @@
     font-family: ownFont;
     src: url("..//fonts/BalsamiqSans-Regular.ttf");
 }
-button{
-    font-family: ownFont;
-}
 
 input {
     font-family: ownFont;
+    font-size: 16px;
 }
 
 #navContainer{

@@ -14,7 +14,7 @@ if (isset($_GET["p"])) {
         case 'login':
             include $baisc_pfad . 'login.php';
             break;
-        case 'regestrieren':
+        case 'registrieren':
             include $baisc_pfad . 'regestrieren.php';
             break;
         case 'uns':

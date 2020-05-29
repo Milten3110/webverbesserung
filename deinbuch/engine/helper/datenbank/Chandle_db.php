@@ -20,6 +20,7 @@ class datenbank
     private static $stmt_createKudenInteresse;
     private static $stmt_bestellungAbfrage;
 
+    private static $stmt_fulltextsearch;
 
     function __construct()
     {
@@ -60,20 +61,62 @@ class datenbank
         self::$stmt_createKudenInteresse  = $this->conn->prepare("insert into KUNDEN_INTERESSE(genre,ausgeliehen,gekauft,kunden_id)
             values( (select genre_name from GENRE where id=? ),?,?,?)");
         self::$stmt_bestellungAbfrage     = $this->conn->prepare("select produkt_id as Produkt,bestelldatum from BESTELLUNGEN where account_id=?");
+        
+        //self::$stmt_fulltextsearch        = $this->conn->prepare("")
     }
 
 
     //  create User
-    public function createNewUser($userame,$password,$email,$vorname,$nachname,$geburtsdatum,$nummer,$bundesland,$plz,$ort,$strasse,$hausnummer)
+    public function createNewUser($userame, $password, $email, $vorname, $nachname, $geburtsdatum, $nummer, $bundesland, $plz, $ort, $strasse, $hausnummer)
     {
-        self::$stmt_createAccount   ->bind_param("sss",$userame,$password,$email);
+        self::$stmt_createAccount->bind_param("sss", $userame, $password, $email);
         self::$stmt_createAccount->execute();
-        self::$stmt_createKunde     ->bind_param("ssssssssss",$vorname,$nachname,$geburtsdatum,$nummer,$bundesland,$plz,$ort,$strasse,$hausnummer,$userame);
+        self::$stmt_createKunde->bind_param("ssssssssss", $vorname, $nachname, $geburtsdatum, $nummer, $bundesland, $plz, $ort, $strasse, $hausnummer, $userame);
     }
 
 
-    public function getProdukte(){
+    public function getProdukte()
+    {
+
         $request = $this->conn->query("select * from produkt");
         return $request;
+    }
+
+
+
+    //  Fulltext Suche
+    /*
+        SET @QUERY = "roman";
+
+        SELECT 
+            id,
+            NAME,
+            author,
+            isbn,
+            verlag,
+            preis,
+            genre_name
+        FROM (
+            SELECT
+                p.id,
+                p.NAME,
+                p.author,
+                p.isbn,
+                p.verlag,
+                p.preis,
+                g.genre_name,
+                MATCH(p.NAME, p.author, p.verlag, p.isbn) AGAINST (@QUERY IN BOOLEAN MODE) AS MATCH1,
+                MATCH(g.genre_name) AGAINST (@QUERY IN BOOLEAN MODE) AS MATCH2
+            FROM produkt p
+            INNER JOIN genre g ON g.id = p.genre_id
+        ) AS q
+        WHERE q.MATCH1 > 0 OR q.MATCH2 > 0
+    */
+
+    public function suche($suchString){
+        $tmpResult = $this->conn->query("call p_fullTextSearch('roman')");
+        foreach($tmpResult as $produkt){
+            echo $produkt['name'] . "<br>" ;
+        }
     }
 }
