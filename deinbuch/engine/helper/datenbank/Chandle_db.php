@@ -61,8 +61,7 @@ class datenbank
         self::$stmt_createKudenInteresse  = $this->conn->prepare("insert into KUNDEN_INTERESSE(genre,ausgeliehen,gekauft,kunden_id)
             values( (select genre_name from GENRE where id=? ),?,?,?)");
         self::$stmt_bestellungAbfrage     = $this->conn->prepare("select produkt_id as Produkt,bestelldatum from BESTELLUNGEN where account_id=?");
-        
-        //self::$stmt_fulltextsearch        = $this->conn->prepare("")
+        self::$stmt_fulltextsearch        = $this->conn->prepare("call p_fullTextSearch(?)");
     }
 
 
@@ -114,9 +113,17 @@ class datenbank
     */
 
     public function suche($suchString){
-        $tmpResult = $this->conn->query("call p_fullTextSearch('roman')");
-        foreach($tmpResult as $produkt){
-            echo $produkt['name'] . "<br>" ;
+        
+        //#### TODO: noch feinschliff, grundlage ist gelegt
+        self::$stmt_fulltextsearch->bind_param("s",$suchString);
+        
+        self::$stmt_fulltextsearch->execute();
+        self::$stmt_fulltextsearch->bind_result($id,$name,$author,$isbn,$verlag,$preis, $genre_name);
+        
+        while(self::$stmt_fulltextsearch->fetch() ){
+            echo $id . $name . $author . $isbn . $verlag . $preis . $genre_name . "<br>";
         }
+
+        self::$stmt_fulltextsearch->close();
     }
 }

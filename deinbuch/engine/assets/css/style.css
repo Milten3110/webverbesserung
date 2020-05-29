@@ -74,6 +74,25 @@ input {
 
 
 
+#suchleistenKontainer{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+#suchInputElemts{
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+}
+
+#suchBtn{
+    margin-left: 10px;
+}
+#suchfeld{
+    width: 300px;
+    text-align: center;
+}
 
 
 
@@ -120,6 +139,16 @@ input {
 .dropdown:hover .dropdown-content{
     display: block;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -353,6 +382,46 @@ body {
 .produktBeschreibung{
     width: 50vw;
 }
+
+
+
+
+
+/*TODO:  übersicht so das die elemente nicht rutschen*/
+
+#produktuebersicht{
+    display: block;
+    
+    flex-direction: row;
+}
+
+.produktKachel{
+    background-color: black;
+
+    position: absolute;
+    top: 200px;
+    left: 300px;
+
+    margin: 50px;
+
+    height: 100px;
+    width: 100px;
+    margin-left: 50px;
+}
+
+.produktKachel:hover{
+    background-color: rgb(92, 92, 92);
+    width: 150px;
+}
+
+
+
+
+
+
+
+
+
 /*###########################################################*/
 
 /*############MEDIA QUERYS###################################*/

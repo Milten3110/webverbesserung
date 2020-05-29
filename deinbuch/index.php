@@ -44,7 +44,7 @@
         <div id="routingContent">
             <?php
             
-            $db->suche("roman");
+            
 
             include "./engine/helper/routing.php";
             ?>
