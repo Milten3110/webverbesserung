@@ -72,4 +72,8 @@ class datenbank
     }
 
 
+    public function getProdukte(){
+        $request = $this->conn->query("select * from produkt");
+        return $request;
+    }
 }

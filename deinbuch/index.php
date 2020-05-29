@@ -16,15 +16,11 @@
 
     ?>
 
-    
-
     <!--   END TEST -->
-    
-
 
     <?php
     session_start();
-    $_SESSION["login"] = 1;
+    $_SESSION["login"] = 0;
     ?>
     <!-- NavContent -->
     <!-- Include NavBar -->
@@ -33,8 +29,11 @@
     ?>
 
 
+
+
+
     <!-- SeitenEffeckt -->
-    <div class="left-gradient darkeffeckt" >
+    <div class="left-gradient darkeffeckt">
     </div>
     <div class="right-gradient darkeffeckt">
     </div>
@@ -42,9 +41,9 @@
     <!-- Routing Content -->
     <div id="routing">
         <div id="routingContent">
-        <?php
-        include "./engine/helper/routing.php";
-        ?>
+            <?php
+            include "./engine/helper/routing.php";
+            ?>
         </div>
     </div>
 </body>
