@@ -387,33 +387,44 @@ body {
 
 
 
-/*TODO:  übersicht so das die elemente nicht rutschen*/
 
-#produktuebersicht{
-    display: block;
-    
+#uebersichtKontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
+    flex-wrap: wrap;
 }
-
-.produktKachel{
-    background-color: black;
-
-    position: absolute;
-    top: 200px;
-    left: 300px;
-
-    margin: 50px;
-
-    height: 100px;
-    width: 100px;
-    margin-left: 50px;
+.variante1{
+    margin-left:20px;
+    margin-top: 30px;
 }
-
-.produktKachel:hover{
-    background-color: rgb(92, 92, 92);
+/*standart Bilder*/
+.variante1 img{
+    height: 200px;
     width: 150px;
+    border-radius: 2px;
+    box-shadow: -5px 8px 8px, 5px 8px 8px;
+}
+.variante1 img:hover{
+    filter: grayscale(80%);
 }
 
+
+/*große Bilder*/
+.variante2{
+    margin-left:20px;
+    margin-top: 30px;
+}
+.variante2 img{
+    height: 400px;
+    width: 300px;
+    border-radius: 2px;
+    box-shadow: -5px 8px 8px, 5px 8px 8px;
+}
+.variante2 img:hover{
+    filter: grayscale(80%);
+}
 
 
 

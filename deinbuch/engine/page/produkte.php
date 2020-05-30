@@ -1,29 +1,48 @@
 <!-- Suchleiste -->
 <div id='suchleiste'>
     <?php
-    include "./engine/page/suchleiste.php"
+    include "./engine/page/suchleiste.php";
+
+    // Minumum an Suchworten 
+    //TODO: Valider
+    if (isset($_POST['suchtext']) && strlen($_POST['suchtext']) >= 3) {
+        $valider->validInput('suche',$_POST['suchtext']);
+        //$db->suche($_POST['suchtext']);
+    }
     ?>
 </div>
 
 <div class='produktWrapp'>
-
-
-    <!-- Erst übersicht anzeigen, hier wird jedes buch angezeigt aber nur ein bild davon, was zu erkenne ist-->
-    <!-- beim hover soll das einzelne Bild größer were ohne dass sich die ganze reihe verschiebt-->
-
-
     <!-- übersicht aller Produkte-->
-    <div id="produktuebersicht">
-        <div class="produktKachel">
-aa
-        </div>
+    <!-- Anzeige der Sortierung: Kacheln: Klein, Groß, -->
+    <div>
+        <form action="" method="POST">
+            <span>Ansichtsmodus </span>
+            <input type="submit" name="variante1" value="Standart">
+            <input type="submit" name="variante2" value="Groß">
+        </form>
+    </div>
 
-        <div class="produktKachel">
-aa
-        </div>
+    <div>
+        <!-- Anzeige der Symbole-->
+        <div id="uebersichtKontainer">
+            <?php
+            $variante = 'variante1';
 
-        <div class="produktKachel">
-aa
+            // Kachelanzeige nach wunsch
+            if (isset($_POST['variante1']) && $variante != 'variante1') {
+                $variante = 'variante1';
+            }
+
+            if (isset($_POST['variante2']) && $variante != 'variante2') {
+                $variante = 'variante2';
+            }
+
+            $produkte = $db->getProdukte() or die("Produkt Load Error!");
+            foreach ($produkte as $produkt) {
+                echo "<div class='$variante'> <img src='./engine/assets/bilder/produkte/db_produkt/" . $produkt['isbn'] . ".jpg' alt=" . $produkt['name'] . ' Buch Bild> </div>';
+            }
+            ?>
         </div>
     </div>
 
@@ -34,34 +53,6 @@ aa
 
 
 
-    <?php
-    $produkte = $db->getProdukte() or die("Produkt Load Error!");
-    foreach ($produkte as $produkt) {
-    ?>
-        <div class='produkt'>
-            <div class='produktBild'>
-                <img src="./engine/assets/bilder/produkte/db_produkt/<?php echo $produkt['isbn'] ?>.jpg" alt="<?php echo $produkt['name'] . ' Buch Bild' ?>">
-            </div>
-            <div class='produktSpec'>
-                <p> Autor: <?php echo $produkt['author'] ?></P>
-                <p> Preis: <?php echo $produkt['preis'] ?> </p>
-                <p> Verlag: <?php echo $produkt['verlag'] ?></p>
-            </div>
-            <div class='produktBeschreibung'>
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris porttitor ante at velit ullamcorper, 
-                pretium cursus sem finibus. Pellentesque tristique ex in nunc auctor scelerisque. Praesent nec quam nibh. 
-                Suspendisse nec laoreet lacus. Duis non fermentum leo. Fusce vitae magna et magna tristique consequat 
-                quis ac diam. Suspendisse sapien quam, pellentesque in nibh at, mollis pellentesque nisi. Vivamus 
-                vulputate velit quis tortor scelerisque, eu pulvinar libero tristique.
-                </p>
-                <form action="" method="post">
-                    <input type="submit" name="kaufen_<?php echo $produkt['isbn']?>" value="In den Warenkorp">
-                </form>
-            </div>
-        </div>
-    <?php
-    }
-    ?>
+
 
 </div>

@@ -9,11 +9,13 @@
 </head>
 
 <body>
-    <!-- Test -->
+    <!-- Classen -->
     <?php
     include "./engine/helper/datenbank/Chandle_db.php";
-    $db = new datenbank();
+    include "./engine/helper/Cvalider.php";
 
+    $db         = new datenbank();
+    $valider    = new CValider();
     
     ?>
 
@@ -23,6 +25,7 @@
     session_start();
     $_SESSION["login"] = 0;
     ?>
+
     <!-- NavContent -->
     <!-- Include NavBar -->
     <?php
