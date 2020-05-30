@@ -22,8 +22,7 @@
     <!--   END TEST -->
 
     <?php
-    session_start();
-    $_SESSION["login"] = 0;
+        require_once "./engine/helper/init_sessiondata.php";
     ?>
 
     <!-- NavContent -->

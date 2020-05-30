@@ -23,17 +23,22 @@ class CValider
         $reg_Suche = "/([A-z]|[0-9]){3,20}/";
         
         preg_match($reg_Suche, $input, $matches);
-        echo var_dump($matches);
-
-        return false;
+        
+        if(strlen($matches[0]) > 2 ){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     //Global Functions
     public function validInput($artDerValidierung, $input){
-        
+        $this->bool_IstValide = false;
+
         switch ($artDerValidierung) {
             case 'suche':
-                $this->validSuche($input);
+                $this->bool_IstValide = $this->validSuche($input);
                 
                 break;
             

@@ -113,17 +113,22 @@ class datenbank
     */
 
     public function suche($suchString){
-        
         //#### TODO: noch feinschliff, grundlage ist gelegt
         self::$stmt_fulltextsearch->bind_param("s",$suchString);
         
         self::$stmt_fulltextsearch->execute();
         self::$stmt_fulltextsearch->bind_result($id,$name,$author,$isbn,$verlag,$preis, $genre_name);
         
+        $tmp_IDcounter = 0;
         while(self::$stmt_fulltextsearch->fetch() ){
-            echo $id . $name . $author . $isbn . $verlag . $preis . $genre_name . "<br>";
+            $idOfProducts[$tmp_IDcounter] = $id;
+            ++ $tmp_IDcounter;
+            //echo $id . $name . $author . $isbn . $verlag . $preis . $genre_name . "<br>";
         }
 
+        unset($tmp_IDcounter);
         self::$stmt_fulltextsearch->close();
+        //need return
+        return $idOfProducts; 
     }
 }
