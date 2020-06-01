@@ -19,7 +19,7 @@ class datenbank
     private static $stmt_createBestellung;
     private static $stmt_createKudenInteresse;
     private static $stmt_bestellungAbfrage;
-
+    private static $stmt_produktabfrage;
     private static $stmt_fulltextsearch;
 
     function __construct()
@@ -62,6 +62,7 @@ class datenbank
             values( (select genre_name from GENRE where id=? ),?,?,?)");
         self::$stmt_bestellungAbfrage     = $this->conn->prepare("select produkt_id as Produkt,bestelldatum from BESTELLUNGEN where account_id=?");
         self::$stmt_fulltextsearch        = $this->conn->prepare("call p_fullTextSearch(?)");
+        self::$stmt_produktabfrage        = $this->conn->prepare("select * from produkt where id=?");
     }
 
 
@@ -76,12 +77,28 @@ class datenbank
 
     public function getProdukte()
     {
-
         $request = $this->conn->query("select * from produkt");
         return $request;
     }
 
+    //TODO: falsche reihenfolge iwie bei verlag und isbn, findet sonst nicht 
+    public function getIsbnProdukt($id){
+        @self::$stmt_produktabfrage->bind_param("i", intval($id));
+        self::$stmt_produktabfrage->execute();
+        self::$stmt_produktabfrage->bind_result($id,$name,$author,$isbn,$verlag,$preis,$genre_name);
 
+        
+        self::$stmt_produktabfrage->fetch();
+        $tmparray['id']             = $id;
+        $tmparray['name']           = $name;
+        $tmparray['author']         = $author;
+        $tmparray['isbn']           = $verlag;
+        $tmparray['verlag']         = $isbn;
+        $tmparray['preis']          = $preis;
+        $tmparray['genre_name']     = $genre_name;
+
+        return $tmparray;
+    }
 
     //  Fulltext Suche
     /*
@@ -129,6 +146,6 @@ class datenbank
         unset($tmp_IDcounter);
         self::$stmt_fulltextsearch->close();
         //need return
-        return $idOfProducts; 
+        return $idOfProducts = isset($idOfProducts) ? $idOfProducts : 0; 
     }
 }

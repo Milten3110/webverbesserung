@@ -1,6 +1,6 @@
 <?php
+$baisc_pfad = 'engine/page/';
 if (isset($_GET["p"])) {
-    $baisc_pfad = 'engine/page/';
     switch (@$_GET["p"]) {
         case 'home':
             include $baisc_pfad . 'home.php';
@@ -32,9 +32,18 @@ if (isset($_GET["p"])) {
             break;
         case 'warenkorb':
             include $baisc_pfad . 'warenkorb.php';
-        break;
+            break;
+
+            //Produkt Details anzeige       
         default:
+            echo $_GET['p'];
             include $baisc_pfad . 'home.php';
+            break;
+    }
+} else if (isset($_GET["details"])) {
+    switch (@$_GET["details"]) {
+        default:
+            include $baisc_pfad . 'produktdetails.php';
             break;
     }
 } else {

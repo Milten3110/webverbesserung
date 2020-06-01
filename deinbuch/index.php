@@ -16,7 +16,6 @@
 
     $db         = new datenbank();
     $valider    = new CValider();
-    
     ?>
 
     <!--   END TEST -->

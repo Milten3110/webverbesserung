@@ -429,7 +429,59 @@ body {
 
 
 
+/*fehlgeschlagene Sucheanfrage response*/
+#suchanfrageGescheitert{
+    font-size: 20;
+    color: red;
+    margin-top: 40px;
+}
 
+
+
+
+/*Detail btn bei Produkten, für die weiterleitung zur Detailansicht, für standart übersicht*/
+.details_01{
+    z-index: 1;
+    height: 200px;
+    width: 150px;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    color: rgba(255,255,255,0);
+}
+
+.details_02{
+    z-index: 2;
+    height: 400px;
+    width: 300px;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    color: rgba(255,255,255,0);
+}
+
+
+
+
+
+#produktDetail{
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 90px;
+}
+
+#produktDetail div:nth-child(2){
+    margin-top:  55px;
+    margin-left: 50px;
+}
+
+#produktDetail div:nth-child(3){
+    margin-top:  55px;
+    margin-left: 250px;
+}
 
 
 
