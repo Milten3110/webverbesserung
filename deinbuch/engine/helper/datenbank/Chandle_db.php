@@ -21,6 +21,7 @@ class datenbank
     private static $stmt_bestellungAbfrage;
     private static $stmt_produktabfrage;
     private static $stmt_fulltextsearch;
+    private static $stmt_login;
 
     function __construct()
     {
@@ -33,6 +34,11 @@ class datenbank
         unset($this->conn);
     }
 
+    private function openNewCon(){
+        $tmpCon = new mysqli(self::DB_SERVER, self::DB_USERNAME, self::DB_PASSWORD, self::DB_NAME, self::DB_PORT) or die("Connection Error!");
+        return $tmpCon;
+
+    }
 
     //###########################################################
     //##################----FUNKTIONEN----#######################
@@ -63,6 +69,31 @@ class datenbank
         self::$stmt_bestellungAbfrage     = $this->conn->prepare("select produkt_id as Produkt,bestelldatum from BESTELLUNGEN where account_id=?");
         self::$stmt_fulltextsearch        = $this->conn->prepare("call p_fullTextSearch(?)");
         self::$stmt_produktabfrage        = $this->conn->prepare("select * from produkt where id=?");
+        self::$stmt_login                 = $this->conn->prepare("select * from account where username='?' and password='?' ");
+
+    }
+
+
+
+    public function login($loginName, $pw){
+        //anzeige wenn pw oder name falsch ist als falsche eingabe
+        //@self::$stmt_login->bind_param("ss", $loginName, $pw);
+        //self::$stmt_login->execute();
+        //@self::$stmt_login->bind_result($id,$username,$password, $password, $treuepunkte);
+        //echo $loginName;
+        //echo "bevor if in login" . "<br>";
+        //nach login erfolgreiche weiterleitung
+        $tmpCon = $this->openNewCon();
+        $result = $tmpCon->query("select * from account where username='$loginName' and password='$pw'");
+        $result = $result->fetch_array();
+        //echo var_dump($result);
+
+        if(isset($result[0])){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 
