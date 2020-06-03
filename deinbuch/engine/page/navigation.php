@@ -9,18 +9,14 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === 1) {
             <a class='navBtn' href='?p=uns'>Über UNS</a>
             <a class='navBtn' href='?p=produkt'>Produkte</a>
 
-            <div class='dropdown>
-                <button class='dropbtn'> Dropdown
-                    <i class='fa fa-caret-down'></i>
-                </button>
-                <div class='dopdown-content'>
-                    <a>Test1</a>
-                    <a>Test2</a>
-                    <a>Test3</a>
+            <div class='dropdown'>
+                <div class='dropbtn'> Mein Profil </div>
+                <div class='dropdown-content'>
+                    <a href='?p=profiel'>Profiel</a>
+                    <a>Warenkorb</a>
+                    <a>Abmelden</a>
                 </div>
             </div>
-
-            <a class='navBtn' href='?p=profiel'>Mein Profiel</a>
 
             </nav>
         </div>
