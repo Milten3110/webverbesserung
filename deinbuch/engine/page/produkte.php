@@ -2,7 +2,7 @@
 <div id='suchleiste'>
     <?php
     include "./engine/page/suchleiste.php";
-    if($_SESSION['gesucht'] && (!isset($_POST['variante1']) || !isset($_POST['variante2'])) ){
+    if(@$_SESSION['gesucht'] && (!isset($_POST['variante1']) || !isset($_POST['variante2'])) ){
         $_SESSION['gesucht'] = false;
     }
 
@@ -61,7 +61,7 @@
             //Not Best Pratices
             //Anzeige der Produkte , oder der Gesuchten Produkte
             $produkte = $db->getProdukte() or die("Produkt Load Error!");
-            if (!$_SESSION['gesucht']) {
+            if (!@$_SESSION['gesucht']) {
                 foreach ($produkte as $produkt) {
                     echo "
                     <div class='" . $_SESSION['variante'] . "'> 

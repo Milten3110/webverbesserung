@@ -33,7 +33,9 @@ if (isset($_GET["p"])) {
         case 'warenkorb':
             include $baisc_pfad . 'warenkorb.php';
             break;
-
+        case 'logout':
+            include "../helper/log_in_out.php";
+        break;
             //Produkt Details anzeige       
         default:
             echo $_GET['p'];

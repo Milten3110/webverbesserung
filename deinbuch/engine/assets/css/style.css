@@ -112,9 +112,7 @@ input {
   .dropdown-content {
     display: none;
     position: absolute;
-    min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
   }
   
   .dropdown-content a {
@@ -124,11 +122,19 @@ input {
     display: block;
   }
   
-  .dropdown-content a:hover {background-color: #ddd;}
+  .dropdown-content a:hover {
+      background-color: rgb(224, 224, 224);
+    }
   
-  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropdown-content {
+      display: block;
+      background: rgb(138, 138, 138);
+      z-index: 1;
+    }
   
-  .dropdown:hover .dropbtn {background-color:rgba(30, 153, 253, 0.849);}
+  .dropdown:hover .dropbtn {
+      background-color:rgba(30, 153, 253, 0.849);
+    }
 
 
 
@@ -431,7 +437,7 @@ body {
 
 /*Detail btn bei Produkten, für die weiterleitung zur Detailansicht, für standart übersicht*/
 .details_01{
-    z-index: 1;
+    z-index: 0;
     height: 200px;
     width: 150px;
     position: absolute;

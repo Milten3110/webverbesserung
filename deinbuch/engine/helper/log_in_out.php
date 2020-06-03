@@ -1,6 +1,6 @@
 <?php
     if(isset($_SESSION['login']) && $_SESSION['login'] === 1){
-        session_destroy();
+        $_SESSION['login'] = 0;
     }
     else{
         $_SESSION['login'] = 1;
