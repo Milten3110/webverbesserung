@@ -492,7 +492,11 @@ body {
 
 
 
-
+/*Fehler meldung bei Regestrieren*/
+#wrongInput{
+    color: red;
+    font-size: 22px;
+}
 
 
 
