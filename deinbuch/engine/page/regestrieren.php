@@ -10,6 +10,18 @@ if (isset($_POST) && count($_POST) > 0 && !$accountInformation) {
     @$_SESSION['reg_email1']     = isset($_POST['email1'])      === true ? $_POST['email1']     : $_SESSION['reg_email1'];
     @$_SESSION['reg_email2']     = isset($_POST['email2'])      === true ? $_POST['email2']     : $_SESSION['reg_email2'];
 
+    //valider
+    $_SESSION['reg_name']       =  @$_POST['name'];
+    $_SESSION['reg_nachname']   =  @$_POST['nachname'];
+    $_SESSION['reg_born']       =  @$_POST['born'];
+    $_SESSION['reg_nummer']     =  @$_POST['nummer'];
+    $_SESSION['reg_bundesland'] =  @$_POST['bundesland'];
+    $_SESSION['reg_plz']        =  @$_POST['plz'];
+    $_SESSION['reg_ort']        =  @$_POST['ort'];
+    $_SESSION['reg_strasse']    =  @$_POST['strasse'];
+    $_SESSION['reg_hsnr']       =  @$_POST['hsnr'];
+
+
 
     //Valid Account Daten
     //username Korrekt ?
@@ -42,16 +54,7 @@ if (isset($_POST['zurueck'])) {
 //dann soll bei fehlerhaften eingaben die meldung kommen was falsch ist 
 //und der user zurück auf die regestierungsseite geleitet.
 if (isset($_POST['reg_abschliesen'])) {
-    //valider
-    $_SESSION['reg_name']       =  @$_POST['name'];
-    $_SESSION['reg_nachname']   =  @$_POST['nachname'];
-    $_SESSION['reg_born']       =  @$_POST['born'];
-    $_SESSION['reg_nummer']     =  @$_POST['nummer'];
-    $_SESSION['reg_bundesland'] =  @$_POST['bundesland'];
-    $_SESSION['reg_plz']        =  @$_POST['plz'];
-    $_SESSION['reg_ort']        =  @$_POST['ort'];
-    $_SESSION['reg_strasse']    =  @$_POST['strasse'];
-    $_SESSION['reg_hsnr']       =  @$_POST['hsnr'];
+
 
 
     //Valid Kunden Informationen
@@ -72,6 +75,13 @@ if (isset($_POST['reg_abschliesen'])) {
                                 if ($valider->validInput('hsnr', $_SESSION['reg_hsnr'])) {
 
                                     //Jetz DB schreiben zum Regestrieren
+                                    //$userame, $password, $email, $vorname, $nachname, $geburtsdatum, $nummer, $bundesland, $plz, $ort, $strasse, $hausnummer
+                                    $db->createNewUser(
+                                        $_SESSION['reg_user'], $_SESSION['reg_password1'], $_SESSION['reg_email1'],  $_SESSION['reg_name'], $_SESSION['reg_nachname'], $_SESSION['reg_born'], "0", $_SESSION['reg_bundesland'], $_SESSION['reg_plz'], $_SESSION['reg_ort'], $_SESSION['reg_strasse'], $_SESSION['reg_hsnr']
+                                    );
+
+                                    header("LOCATION: ?p=login");
+
                                 } else {
                                     echo "<p id='wrongInput'> Ungültige Eingabe der Hausnummer !</p>";
                                 }

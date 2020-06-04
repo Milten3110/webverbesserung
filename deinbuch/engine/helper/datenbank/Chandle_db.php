@@ -98,11 +98,23 @@ class datenbank
 
 
     //  create User
-    public function createNewUser($userame, $password, $email, $vorname, $nachname, $geburtsdatum, $nummer, $bundesland, $plz, $ort, $strasse, $hausnummer)
+    public function createNewUser($userame, $password, $email, $vorname, $nachname, $geburtsdatum, $nummer = 0, $bundesland, $plz, $ort, $strasse, $hausnummer)
     {
-        self::$stmt_createAccount->bind_param("sss", $userame, $password, $email);
-        self::$stmt_createAccount->execute();
-        self::$stmt_createKunde->bind_param("ssssssssss", $vorname, $nachname, $geburtsdatum, $nummer, $bundesland, $plz, $ort, $strasse, $hausnummer, $userame);
+        //Fehler, TODO: via Prepared Statements lösen
+        //$nummer = "nonne";
+        //self::$stmt_createAccount->bind_param("sss", $userame, $password, $email);
+        //self::$stmt_createAccount->execute();
+        //self::$stmt_createKunde->bind_param("ssssssssss", $vorname, $nachname, $geburtsdatum, $nummer, $bundesland, $plz, $ort, $strasse, $hausnummer, $userame);
+        //self::$stmt_createKunde->execute();
+        $tmpDb = $this->openNewCon();
+        $tmpDb->query("insert into account(username,password, email, treuepunkte) values('$userame', '$password', '$email', 0)") or die("Fehler beim erstellen eines Kunden" . $tmpDb->error);
+        $tmpID = $tmpDb->query("select id from account where username='$userame'");
+        $tmpID = $tmpID->fetch_assoc();
+        $id = $tmpID['id'];
+
+        $tmpDb->query("insert into kunde(vorname, nachname, geburtsdatum, nummer, bundesland, plz, ort, strasse, hausnummer, account_id)
+            values('$vorname','$nachname','$geburtsdatum', 0, '$bundesland','$plz','$ort','$strasse','$hausnummer', $id )") or die("Fehler: " . $tmpDb->error);
+
     }
 
 
