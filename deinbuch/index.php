@@ -28,8 +28,6 @@
     <!-- Include NavBar -->
     <?php
     include "./engine/page/navigation.php";
-
-    echo $_SESSION['login'] == 0 ? 'Anmelden zum Kaufen' : 'In den Warenkorb';
     ?>
 
 
@@ -45,9 +43,6 @@
     <div id="routing">
         <div id="routingContent">
             <?php
-            
-            
-
             include "./engine/helper/routing.php";
             ?>
         </div>

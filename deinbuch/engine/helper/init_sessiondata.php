@@ -12,3 +12,11 @@ else{
     $_SESSION['gesucht']                = false;
     $_SESSION['detailsBtn']             = 'details_01';
 }
+
+function resetFormData(){
+    unset($_SESSION['reg_user']     ); 
+    unset($_SESSION['reg_password1']); 
+    unset($_SESSION['reg_password2']); 
+    unset($_SESSION['reg_email1']   ); 
+    unset($_SESSION['reg_email2']   ); 
+}

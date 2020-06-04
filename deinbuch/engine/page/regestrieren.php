@@ -6,14 +6,17 @@ $kundenInformation         = false;
 if (isset($_POST) && count($_POST) > 0 && !$accountInformation) {
     $accountInformation         = true;
 
-    $_SESSION['reg_user']       = $_POST['user'];
-    $_SESSION['reg_password1']  = $_POST['password1'];
-    $_SESSION['reg_password2']  = $_POST['password2'];
-    $_SESSION['reg_email1']     = $_POST['email1'];
-    $_SESSION['reg_email2']     = $_POST['email2'];
+    @$_SESSION['reg_user']       = isset($_POST['user'])        === true ? $_POST['user']       : $_SESSION['reg_user'];
+    @$_SESSION['reg_password1']  = isset($_POST['password1'])   === true ? $_POST['password1']  : $_SESSION['reg_password1'];
+    @$_SESSION['reg_password2']  = isset($_POST['password2'])   === true ? $_POST['password2']  : $_SESSION['reg_password2'];
+    @$_SESSION['reg_email1']     = isset($_POST['email1'])      === true ? $_POST['email1']     : $_SESSION['reg_email1'];
+    @$_SESSION['reg_email2']     = isset($_POST['email2'])      === true ? $_POST['email2']     : $_SESSION['reg_email2'];
 }
 
-
+if(isset($_POST['zurueck'])){
+    //zurück auf Account Informationen
+    $accountInformation = false;
+}
 
 
 //  Seitenwegsel zwischen Kundeninformationen und AccountInformation
@@ -22,9 +25,9 @@ if (isset($_POST) && count($_POST) > 0 && !$accountInformation) {
 if ($accountInformation) {
     echo "
         <div class='regContainer'>
-        <form action='' methode='POST' class='reginput'>
+        <form action='' method='POST' class='reginput'>
             <span> <h2> Persönliche Informationen </h2></span>
-
+            <input type='submit' name='zurueck' value='zurück'>
             <p> Ihr Amtlicher Vorname / Rufname </p>
             <input type='text' name='name'          placeholder='Vornamen'       minlength='3' maxlength='90'>  
             <p> Ihr Amtlicher Nachname / Familienname </p>
@@ -57,13 +60,13 @@ if ($accountInformation) {
 
         
             <p> Max 16 Zeichen und mindestes 8 Zeichen</p>
-            <input type='text' name='user'      placeholder='Benutzernamen'              minlength='8' maxlength='20'>
+            <input type='text' name='user'      placeholder='Benutzernamen'              minlength='8' maxlength='20'  value='" . @ $_SESSION['reg_user']. "'> 
             <p> Max 16 Zeichen und mindestens 8 Zeichen, Abc, 0-9, ! und ? sind erlaubt.</p>
-            <input type='text' name='password1' placeholder='Passwort'                   minlength='8' maxlength='16'>
-            <input type='text' name='password2' placeholder='Passwort wiederholen'       minlength='8' maxlength='16'>
+            <input type='text' name='password1' placeholder='Passwort'                   minlength='8' maxlength='16' value='" .  @$_SESSION['reg_password1']. "'>
+            <input type='text' name='password2' placeholder='Passwort wiederholen'       minlength='8' maxlength='16' value='" .  @$_SESSION['reg_password2']. "'>
             <p> Bitte geben Sie hier Ihre Email ein.</p>
-            <input type='text' name='email1'    placeholder='Email'                      minlength='8' maxlength='50'>
-            <input type='text' name='email2'    placeholder='Email wiederholen'          minlength='8' maxlength='50'>
+            <input type='text' name='email1'    placeholder='Email'                      minlength='8' maxlength='50' value='" .  @$_SESSION['reg_email1']. "'>
+            <input type='text' name='email2'    placeholder='Email wiederholen'          minlength='8' maxlength='50' value='" .  @$_SESSION['reg_email2']. "'>
 
             <div class='sendenBtn'> <input type='submit' value='Schritt 2'> </div>
             </form>

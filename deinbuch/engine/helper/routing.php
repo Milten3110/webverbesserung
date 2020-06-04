@@ -51,3 +51,8 @@ if (isset($_GET["p"])) {
 } else {
     header("Location: ?p=home");
 }
+
+//reset FormData when change the apge from registrieren
+if($_GET['p'] != 'registrieren'){
+    resetFormData();
+}
