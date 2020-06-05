@@ -34,10 +34,10 @@ class datenbank
         unset($this->conn);
     }
 
-    private function openNewCon(){
+    private function openNewCon()
+    {
         $tmpCon = new mysqli(self::DB_SERVER, self::DB_USERNAME, self::DB_PASSWORD, self::DB_NAME, self::DB_PORT) or die("Connection Error!");
         return $tmpCon;
-
     }
 
     //###########################################################
@@ -70,12 +70,12 @@ class datenbank
         self::$stmt_fulltextsearch        = $this->conn->prepare("call p_fullTextSearch(?)");
         self::$stmt_produktabfrage        = $this->conn->prepare("select * from produkt where id=?");
         self::$stmt_login                 = $this->conn->prepare("select * from account where username='?' and password='?' ");
-
     }
 
 
 
-    public function login($loginName, $pw){
+    public function login($loginName, $pw)
+    {
         //anzeige wenn pw oder name falsch ist als falsche eingabe
         //@self::$stmt_login->bind_param("ss", $loginName, $pw);
         //self::$stmt_login->execute();
@@ -88,10 +88,9 @@ class datenbank
         $result = $result->fetch_array();
         //echo var_dump($result);
 
-        if(isset($result[0])){
+        if (isset($result[0])) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -114,7 +113,6 @@ class datenbank
 
         $tmpDb->query("insert into kunde(vorname, nachname, geburtsdatum, nummer, bundesland, plz, ort, strasse, hausnummer, account_id)
             values('$vorname','$nachname','$geburtsdatum', 0, '$bundesland','$plz','$ort','$strasse','$hausnummer', $id )") or die("Fehler: " . $tmpDb->error);
-
     }
 
 
@@ -125,12 +123,13 @@ class datenbank
     }
 
     //TODO: falsche reihenfolge iwie bei verlag und isbn, findet sonst nicht 
-    public function getIsbnProdukt($id){
+    public function getIsbnProdukt($id)
+    {
         @self::$stmt_produktabfrage->bind_param("i", intval($id));
         self::$stmt_produktabfrage->execute();
-        self::$stmt_produktabfrage->bind_result($id,$name,$author,$isbn,$verlag,$preis,$genre_name);
+        self::$stmt_produktabfrage->bind_result($id, $name, $author, $isbn, $verlag, $preis, $genre_name);
 
-        
+
         self::$stmt_produktabfrage->fetch();
         $tmparray['id']             = $id;
         $tmparray['name']           = $name;
@@ -142,6 +141,30 @@ class datenbank
 
         return $tmparray;
     }
+
+    public function buy($punkte, $produkte)
+    {
+        $tmpDb = $this->openNewCon();
+        $tmp = $this->getProdukte();
+        
+        //$tmp = $tmp->fetch_array();
+
+        
+
+        //echo var_dump($produkte);
+
+        foreach ($produkte as $isbn => $anzahl) {
+            
+            echo var_dump($isbn);
+            echo var_dump($anzahl);
+            $tmpDb->query("insert into bestellungen (account_id,bestelldatum, produkt_id) values()");
+        }
+
+
+        //hinzufügung der bestllung
+        //ändern der punkte
+    }
+
 
     //  Fulltext Suche
     /*
@@ -172,23 +195,24 @@ class datenbank
         WHERE q.MATCH1 > 0 OR q.MATCH2 > 0
     */
 
-    public function suche($suchString){
+    public function suche($suchString)
+    {
         //#### TODO: noch feinschliff, grundlage ist gelegt
-        self::$stmt_fulltextsearch->bind_param("s",$suchString);
-        
+        self::$stmt_fulltextsearch->bind_param("s", $suchString);
+
         self::$stmt_fulltextsearch->execute();
-        self::$stmt_fulltextsearch->bind_result($id,$name,$author,$isbn,$verlag,$preis, $genre_name);
-        
+        self::$stmt_fulltextsearch->bind_result($id, $name, $author, $isbn, $verlag, $preis, $genre_name);
+
         $tmp_IDcounter = 0;
-        while(self::$stmt_fulltextsearch->fetch() ){
+        while (self::$stmt_fulltextsearch->fetch()) {
             $idOfProducts[$tmp_IDcounter] = $id;
-            ++ $tmp_IDcounter;
+            ++$tmp_IDcounter;
             //echo $id . $name . $author . $isbn . $verlag . $preis . $genre_name . "<br>";
         }
 
         unset($tmp_IDcounter);
         self::$stmt_fulltextsearch->close();
         //need return
-        return $idOfProducts = isset($idOfProducts) ? $idOfProducts : 0; 
+        return $idOfProducts = isset($idOfProducts) ? $idOfProducts : 0;
     }
 }

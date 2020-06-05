@@ -1,13 +1,18 @@
 <?php
+$result = $db->getIsbnProdukt(intval($_GET['details']));
 //add to Warenkorp wenn eingeloggt
 if(isset($_POST['buy']) && $_SESSION['login'] == 1){
     // nun in den Warenkorp
+    //echo intval($_GET['details']);
+    
+    @$_SESSION['produkte'][$result['isbn']] += 1;
+    //echo var_dump($_SESSION['produkte']);
+
 }
 
 
-$result = $db->getIsbnProdukt(intval($_GET['details']));
 
-echo var_dump($result) . "<br>";
+//echo var_dump($result) . "<br>";
 
 $tmpProduktBeschreibung = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae ornare nisl. Mauris eu vehicula nibh. Integer vehicula pulvinar erat vel fringilla. Morbi diam dui, feugiat eu urna vel,
 tempor imperdiet quam. Donec venenatis tempor justo, et eleifend ex cursus quis. Aliquam imperdiet urna in viverra lobortis. Nam porttitor eros euismod sollicitudin facilisis. Nunc tincidunt erat vel tellus

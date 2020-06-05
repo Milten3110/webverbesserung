@@ -29,4 +29,7 @@ function resetFormData(){
     unset($_SESSION['reg_ort']);
     unset($_SESSION['reg_strasse']);
     unset($_SESSION['reg_hsnr']);
+
+    unset($_SESSION['gesamtpreis']);
+    unset($_SESSION['treuepunkte']);
 }

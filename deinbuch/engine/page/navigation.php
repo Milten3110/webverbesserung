@@ -13,7 +13,7 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === 1) {
                 <div class='dropbtn'> Mein Profil </div>
                 <div class='dropdown-content'>
                     <a href='?p=profiel'>Profiel</a>
-                    <a>Warenkorb</a>
+                    <a href='?p=warenkorb'>Warenkorb</a>
                     <a href='?p=logout'>Abmelden</a>
                 </div>
             </div>
