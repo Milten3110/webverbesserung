@@ -16,7 +16,7 @@
 
             if($b_01 && $b_02){
                 // now check db user exists 
-                if($db->login($_POST['benutzerName'], $_POST['benutzerPw'])){
+                if($db->login($_POST['benutzerName'], md5($_POST['benutzerPw']))){
                     //jetzt eingeloggt
                     $_SESSION['login'] = 1;
                     header('LOCATION: ?p=home');

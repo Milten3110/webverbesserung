@@ -77,7 +77,7 @@ if (isset($_POST['reg_abschliesen'])) {
                                     //Jetz DB schreiben zum Regestrieren
                                     //$userame, $password, $email, $vorname, $nachname, $geburtsdatum, $nummer, $bundesland, $plz, $ort, $strasse, $hausnummer
                                     $db->createNewUser(
-                                        $_SESSION['reg_user'], $_SESSION['reg_password1'], $_SESSION['reg_email1'],  $_SESSION['reg_name'], $_SESSION['reg_nachname'], $_SESSION['reg_born'], "0", $_SESSION['reg_bundesland'], $_SESSION['reg_plz'], $_SESSION['reg_ort'], $_SESSION['reg_strasse'], $_SESSION['reg_hsnr']
+                                        $_SESSION['reg_user'], md5($_SESSION['reg_password1']), $_SESSION['reg_email1'],  $_SESSION['reg_name'], $_SESSION['reg_nachname'], $_SESSION['reg_born'], "0", $_SESSION['reg_bundesland'], $_SESSION['reg_plz'], $_SESSION['reg_ort'], $_SESSION['reg_strasse'], $_SESSION['reg_hsnr']
                                     );
 
                                     header("LOCATION: ?p=login");

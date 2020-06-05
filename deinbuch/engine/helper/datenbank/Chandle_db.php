@@ -143,6 +143,21 @@ class datenbank
     }
 
 
+    public function getOrders($kundenID){
+        $tmp = $this->openNewCon();
+        $result = $tmp->query("select * from bestellungen where account_id=".$kundenID."");
+        $tmp->close();
+        return $result;
+    }
+
+    public function getUserInformation($kundenID){
+        $tmp = $this->openNewCon();
+        $result[0] = $tmp->query("select * from kunde where account_id=". $kundenID."");
+        $result[1] = $tmp->query("select treuepunkte from account where id=". $kundenID. "");
+        $tmp->close();
+        return $result;
+    }
+
     public function getGenre(){
         $tmp = $this->openNewCon();
         $result = $tmp->query("select genre_name from genre");
@@ -157,11 +172,11 @@ class datenbank
         $tmp = $this->getProdukte();
 
         //hinzufügung der bestllung
-        //foreach ($produkte as $isbn => $anzahl) {
-        //    for($index = 0; $index < $anzahl; ++$index){
-        //        $tmpDb->query("insert into bestellungen (account_id, produkt_id) values(".$_SESSION['account_id'].", (select id from produkt where isbn='". $isbn ."') )");
-        //    }
-        //}
+        foreach ($produkte as $isbn => $anzahl) {
+            for($index = 0; $index < $anzahl; ++$index){
+                $tmpDb->query("insert into bestellungen (account_id, produkt_id) values(".$_SESSION['account_id'].", (select id from produkt where isbn='". $isbn ."') )");
+            }
+        }
         //ändern der punkte
         
         $alterPunktestand = $tmpDb->query("select * from account where id=". intval($_SESSION['account_id']) ."");
