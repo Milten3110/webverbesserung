@@ -17,6 +17,8 @@
         }
     }
     ?>
+
+
 </div>
 
 <div class='produktWrapp'>
@@ -80,7 +82,7 @@
                         if(@$produkt['id'] == @$searchresponse[$tmpCounter] && count(@$searchresponse) > $tmpCounter){
                             echo "
                             <div class='$_SESSION[variante]'> 
-                            <span><input type='submit' class='class='" . $_SESSION['detailsBtn'] . "' name='" . $produkt['isbn'] . "'> </span>
+                            <span><a href='?details=". $produkt['id']."' class='". $_SESSION['detailsBtn']. "' name='" . $produkt['isbn'] . "'> </a> </span>
                             <img src='./engine/assets/bilder/produkte/db_produkt/" . $produkt['isbn'] . ".jpg' alt=" . $produkt['name'] . ' Buch Bild>
                         </div>';
                             ++ $tmpCounter;

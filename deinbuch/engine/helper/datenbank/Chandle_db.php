@@ -143,6 +143,13 @@ class datenbank
     }
 
 
+    public function getGenre(){
+        $tmp = $this->openNewCon();
+        $result = $tmp->query("select genre_name from genre");
+        $tmp->close();
+
+        return $result;
+    }
 
     public function buy($punkte, $produkte)
     {
@@ -163,6 +170,7 @@ class datenbank
 
         $neuerPunkteStand = $alterPunktestand + $punkte;
         $tmpDb->query("update account set treuepunkte = $neuerPunkteStand where id = ". $_SESSION['account_id'] ."");
+        $tmpDb->close();
     }
 
 

@@ -537,7 +537,11 @@ body {
 }
 
 
-
+/*dropdown suche*/
+#kategorieSelect{
+    margin-left: 10px;
+    height: 26px;
+}
 
 
 

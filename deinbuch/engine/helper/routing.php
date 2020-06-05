@@ -53,6 +53,6 @@ if (isset($_GET["p"])) {
 }
 
 //reset FormData when change the apge from registrieren
-if($_GET['p'] != 'registrieren'){
+if(@$_GET['p'] != 'registrieren'){
     resetFormData();
 }
