@@ -500,6 +500,43 @@ body {
 
 
 
+/*Warenkorb*/
+#warenkorp table:nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#warenkorp table:nth-child(2){
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#warenkorp table tr td{
+    padding: 20px;
+}
+#warenkorp {
+    border: 1px solid black;
+}
+#warenkorp  table tr:first-child{
+    font-size: 18px;
+    font-weight: 800;
+}
+#warenkorp  table:first-child tr td:nth-child(7){
+    padding: 2px;
+}
+#warenkorp  table:first-child tr td:nth-child(7){
+    padding: 2px;
+}
+
+#warenkorp table:nth-child(1){
+    border-bottom: 1px solid black;
+    border-inline: 1px solid black;
+}
+
+
 
 
 

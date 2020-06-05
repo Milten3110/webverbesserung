@@ -87,7 +87,7 @@ class datenbank
         $result = $tmpCon->query("select * from account where username='$loginName' and password='$pw'");
         $result = $result->fetch_array();
         //echo var_dump($result);
-
+        $_SESSION['account_id'] = $result['id'];
         if (isset($result[0])) {
             return true;
         } else {
@@ -142,27 +142,27 @@ class datenbank
         return $tmparray;
     }
 
+
+
     public function buy($punkte, $produkte)
     {
         $tmpDb = $this->openNewCon();
         $tmp = $this->getProdukte();
-        
-        //$tmp = $tmp->fetch_array();
-
-        
-
-        //echo var_dump($produkte);
-
-        foreach ($produkte as $isbn => $anzahl) {
-            
-            echo var_dump($isbn);
-            echo var_dump($anzahl);
-            $tmpDb->query("insert into bestellungen (account_id,bestelldatum, produkt_id) values()");
-        }
-
 
         //hinzufügung der bestllung
+        //foreach ($produkte as $isbn => $anzahl) {
+        //    for($index = 0; $index < $anzahl; ++$index){
+        //        $tmpDb->query("insert into bestellungen (account_id, produkt_id) values(".$_SESSION['account_id'].", (select id from produkt where isbn='". $isbn ."') )");
+        //    }
+        //}
         //ändern der punkte
+        
+        $alterPunktestand = $tmpDb->query("select * from account where id=". intval($_SESSION['account_id']) ."");
+        $alterPunktestand = $alterPunktestand->fetch_array();
+        $alterPunktestand = $alterPunktestand['treuepunkte'];
+
+        $neuerPunkteStand = $alterPunktestand + $punkte;
+        $tmpDb->query("update account set treuepunkte = $neuerPunkteStand where id = ". $_SESSION['account_id'] ."");
     }
 
 

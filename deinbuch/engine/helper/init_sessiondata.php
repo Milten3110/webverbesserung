@@ -11,6 +11,7 @@ else{
     $_SESSION['variante']               = 'variante2';
     $_SESSION['gesucht']                = false;
     $_SESSION['detailsBtn']             = 'details_01';
+    $_SESSION['account_id']             = -1;
 }
 
 function resetFormData(){
