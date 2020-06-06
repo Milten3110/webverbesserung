@@ -166,6 +166,13 @@ class datenbank
         return $result;
     }
 
+    public function directQuery($query){
+        $tmp = $this->openNewCon();
+        $result = $tmp->query($query);
+        $tmp->close();
+        return $result;
+    }
+
     public function buy($punkte, $produkte)
     {
         $tmpDb = $this->openNewCon();
