@@ -550,6 +550,13 @@ body {
     justify-content: center;
     margin-top: 20px;
 }
+.profielTable tr td{
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid black;
+}
+
+
 
 /*###########################################################*/
 
